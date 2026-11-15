@@ -9,8 +9,6 @@
 
 # MySkills
 
-**Versão:** 1.0
-
 Catálogo aberto de skills de agente para interface, marca, browser, segurança e mapa. Cada bloco diz para que serve e como instalar.
 
 Este repositório não copia o código dessas skills. Ele indica o projeto de origem. A licença, o uso e as atualizações continuam em cada repositório.
