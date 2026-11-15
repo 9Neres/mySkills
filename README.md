@@ -7,10 +7,13 @@
   >
 </p>
 
-# Skills para o meu setup
+# MySkills
 
+**Versão:** 1.0
 
-Catálogo das skills de agente que já uso neste Mac e das que entram no mesmo pacote: interface, marca, browser, segurança e o mapa open source. Cada bloco diz para que serve e como instalar.
+Catálogo aberto de skills de agente para interface, marca, browser, segurança e mapa. Cada bloco diz para que serve e como instalar.
+
+Este repositório não copia o código dessas skills. Ele indica o projeto de origem. A licença, o uso e as atualizações continuam em cada repositório.
 
 [![Node.js](https://img.shields.io/badge/Node.js-22+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -26,7 +29,7 @@ Catálogo das skills de agente que já uso neste Mac e das que entram no mesmo p
 - Um agente que leia `SKILL.md`: Claude Code, Cursor, Codex, Grok ou outro compatível com [Agent Skills](https://agentskills.io/).
 - Google Chrome, Edge ou Chromium, para o Taste Skill e para o `agent-browser`.
 
-Confira o que já está na máquina:
+Confira as ferramentas:
 
 ```bash
 node -v
@@ -50,24 +53,18 @@ npx skills add <owner/repo> --list
 
 Reinicie o agente depois de instalar. Skill nova só entra na sessão seguinte.
 
+O diretório de destino muda conforme o agente. O CLI escolhe o lugar certo. Evite copiar uma skill para a pasta pessoal de outra pessoa ou commitar essa pasta dentro de um projeto.
+
 ## O que cada um faz
-
-### Já neste Mac
-
-| Skill | Para que serve |
-| --- | --- |
-| [superpowers](https://github.com/obra/superpowers) | Metodologia do agente: esclarece o pedido, escreve o plano, implementa com testes e revisa antes de encerrar. A skill `using-superpowers` já está em `~/.agents/skills` e `~/.claude/skills`. |
-| [security-audit](https://github.com/cloudflare/security-audit-skill) | Auditoria de código em fases, com achados verificáveis. Já está em `~/.agents/skills/security-audit`. |
-| [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Banco local de estilos, paletas, fontes e regras de UI para web e mobile. Já está em `~/.agents/skills/ui-ux-pro-max`. |
 
 ### Método de trabalho
 
 **superpowers** faz o agente parar antes de codar. O fluxo é brainstorming, plano em tarefas pequenas, TDD, review e fechamento do branch. As skills internas incluem `brainstorming`, `writing-plans`, `test-driven-development`, `systematic-debugging` e `subagent-driven-development`.
 
-No Grok:
+A instalação muda por agente. O guia está em [obra/superpowers](https://github.com/obra/superpowers#installation). No Claude Code:
 
-```bash
-grok plugin install superpowers@xai-official --trust
+```text
+/plugin install superpowers@claude-plugins-official
 ```
 
 **security-audit** conduz uma auditoria defensiva do repositório: reconhecimento, caça por cobertura, validação de cada candidato, `findings.json` e relatório. O modo completo só roda quando a auditoria é pedida. Perguntas pontuais ficam em modo de orientação.
@@ -78,7 +75,7 @@ npx skills add https://github.com/cloudflare/security-audit-skill --skill securi
 
 ### Interface, marca e página
 
-**ui-ux-pro-max** escolhe estilo, cor, tipo e stack antes de gerar a tela. Cobre React, Next.js, Vue, Tailwind, shadcn/ui, SwiftUI, Flutter e outras. A busca roda em Python no seu computador.
+**ui-ux-pro-max** escolhe estilo, cor, tipo e stack antes de gerar a tela. Cobre React, Next.js, Vue, Tailwind, shadcn/ui, SwiftUI, Flutter e outras. A busca roda em Python na máquina de quem instalou.
 
 ```bash
 npx ui-ux-pro-max-cli init --ai claude
@@ -102,14 +99,16 @@ O guia para colar no projeto está em [AGENTS.md](https://raw.githubusercontent.
 
 **logo-design** conduz um logo do briefing ao SVG: tipo de marca, construção, cor, teste em tamanho pequeno e uma biblioteca de referência para estudar, sem copiar. As ferramentas são Python, sem dependência extra.
 
-```bash
-git clone https://github.com/kaankiziltug/logo-design-skill.git
-cp -r logo-design-skill/skills/logo-design ~/.agents/skills/logo-design
+No Claude Code:
+
+```text
+/plugin marketplace add kaankiziltug/logo-design-skill
+/plugin install logo-design@logo-design-skill
 ```
 
-No Claude Code o caminho oficial é o marketplace: `/plugin marketplace add kaankiziltug/logo-design-skill` e `/plugin install logo-design@logo-design-skill`.
+Em outros agentes, clone e copie a pasta `skills/logo-design` para o diretório de skills do agente. O caminho oficial está no [repositório](https://github.com/kaankiziltug/logo-design-skill).
 
-**ip-as-logo** gera mascote simples, com poucas formas, duas cores de personagem e um fundo sólido. O fluxo propõe três direções e, depois do ok, seis imagens. Precisa de um modelo de imagem forte. O resultado é imagem, não SVG.
+**ip-as-logo** gera mascote simples, com poucas formas, duas cores de personagem e um fundo sólido. O fluxo propõe três direções e, depois do ok, seis imagens. Precisa de um modelo de imagem forte. O resultado é imagem.
 
 ```bash
 npx skills@latest add s1dashu/ip-as-logo-skill --global -y
@@ -136,17 +135,17 @@ npx skills add vercel-labs/agent-browser --global -y
 
 Antes do primeiro uso no agente: `agent-browser skills get core`.
 
-**remote-agent-browser** é o par do `agent-browser` na nuvem. Sobe o mesmo browser dentro de um Vercel Sandbox, com página, cookie e referências de elemento compartilhados na sessão. Entra como biblioteca no projeto, não como skill.
+**remote-agent-browser** é o par do `agent-browser` na nuvem. Sobe o mesmo browser dentro de um Vercel Sandbox, com página, cookie e referências de elemento compartilhados na sessão. Entra como biblioteca no projeto.
 
 ```bash
 pnpm add remote-agent-browser
 ```
 
-Na Vercel a autenticação usa `VERCEL_OIDC_TOKEN`. Fora dela, o cliente recebe credencial curta de time e projeto. O sandbox pode gerar custo.
+Na Vercel a autenticação usa `VERCEL_OIDC_TOKEN`. Fora dela, o cliente recebe credencial curta de time e projeto. O sandbox pode gerar custo. Não coloque token, time ou project id neste repositório.
 
 ### Mapa
 
-**mapcn** é biblioteca de componentes, não uma skill. São mapas React em cima de MapLibre, Tailwind e shadcn/ui: tema claro e escuro, marcador, popup, rota e controles. O projeto também publica uma skill opcional que ensina o agente a usar esses componentes.
+**mapcn** é biblioteca de componentes. São mapas React em cima de MapLibre, Tailwind e shadcn/ui: tema claro e escuro, marcador, popup, rota e controles. O projeto também publica uma skill opcional que ensina o agente a usar esses componentes.
 
 Pré-requisito do componente: projeto com Tailwind e shadcn/ui.
 
@@ -171,44 +170,42 @@ export function MyMap() {
 
 O mapa padrão usa tiles CARTO. Docs: [mapcn.dev](https://mapcn.dev).
 
-### Front-end e desenvolvimento que valem no pacote
+### Front-end e desenvolvimento
 
-Estas já estão neste Mac e cobrem página, SEO, dados e vídeo em React.
+Skills públicas que completam página, SEO, dados e vídeo.
 
-| Skill | Para que serve | Onde está |
+| Skill | Para que serve | Instalar |
 | --- | --- | --- |
-| `cro` | Revisa landing page e formulário pelo que trava a conversão. | `~/.agents/skills/cro` |
-| `seo-audit` | Auditoria técnica: indexação, meta, Core Web Vitals e rastreio. | `~/.agents/skills/seo-audit` |
-| `find-skills` | Procura skill pronta no [skills.sh](https://skills.sh/) antes de inventar fluxo novo. | `~/.agents/skills/find-skills` |
-| `supabase` | Auth, banco, RLS, Storage, Edge Functions e logs do projeto Supabase. | `~/.agents/skills/supabase` |
-| `supabase-postgres-best-practices` | Tipo de coluna, índice, policy e SQL em qualquer Postgres. | `~/.agents/skills/supabase-postgres-best-practices` |
-| `remotion-best-practices` | Roteador das skills de vídeo em React: criar, legendar, animar mapa e exportar. | `~/.agents/skills/remotion-best-practices` |
-| `threejs-frame-conventions` | Alinha controle, câmera e frente do personagem num Three.js y-up. | skill bundled do Grok |
-
-Duas skills de front-end que ainda não estão instaladas e fecham o pacote com a Vercel:
-
-```bash
-npx skills add https://github.com/vercel-labs/agent-skills --skill react-best-practices --global -y
-npx skills add https://github.com/vercel-labs/agent-skills --skill composition-patterns --global -y
-```
-
-`react-best-practices` junta regras de performance de React e Next.js: waterfall, bundle, render e data fetching. `composition-patterns` cobre composição de componentes em vez de prop drilling e booleanos demais.
+| [cro](https://github.com/coreyhaines31/marketingskills) | Revisa landing page e formulário pelo que trava a conversão. | `npx skills add coreyhaines31/marketingskills --skill cro --global -y` |
+| [seo-audit](https://github.com/coreyhaines31/marketingskills) | Auditoria técnica: indexação, meta, Core Web Vitals e rastreio. | `npx skills add coreyhaines31/marketingskills --skill seo-audit --global -y` |
+| [supabase](https://github.com/supabase/agent-skills) | Auth, banco, RLS, Storage, Edge Functions e logs do projeto Supabase. | `npx skills add supabase/agent-skills --skill supabase --global -y` |
+| [supabase-postgres-best-practices](https://github.com/supabase/agent-skills) | Tipo de coluna, índice, policy e SQL em qualquer Postgres. | `npx skills add supabase/agent-skills --skill supabase-postgres-best-practices --global -y` |
+| [remotion-best-practices](https://github.com/remotion-dev/skills) | Roteador das skills de vídeo em React: criar, legendar, animar mapa e exportar. | `npx skills add remotion-dev/skills --global -y` |
+| [react-best-practices](https://github.com/vercel-labs/agent-skills) | Performance de React e Next.js: waterfall, bundle, render e data fetching. | `npx skills add vercel-labs/agent-skills --skill react-best-practices --global -y` |
+| [composition-patterns](https://github.com/vercel-labs/agent-skills) | Composição de componentes, com menos prop drilling. | `npx skills add vercel-labs/agent-skills --skill composition-patterns --global -y` |
 
 ## Executando
 
-Instale o que ainda falta neste Mac:
+Instale o pacote de skills:
 
 ```bash
+npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit --global -y
 npx skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend --global -y
 npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines --global -y
 npx skills add https://github.com/vercel-labs/agent-skills --skill react-best-practices --global -y
+npx skills add https://github.com/vercel-labs/agent-skills --skill composition-patterns --global -y
 npx skills@latest add s1dashu/ip-as-logo-skill --global -y
 npx skills add DominikScholz/open-bot-avatar --skill generate-avatar --global -y
 npx skills add vercel-labs/agent-browser --global -y
 npx skills add AnmolSaini16/mapcn --skill mapcn --global -y
+npx skills add coreyhaines31/marketingskills --skill cro --global -y
+npx skills add coreyhaines31/marketingskills --skill seo-audit --global -y
+npx skills add supabase/agent-skills --skill supabase --global -y
+npx skills add supabase/agent-skills --skill supabase-postgres-best-practices --global -y
+npx skills add remotion-dev/skills --global -y
 ```
 
-O Logo Design, o pacote `open-bot-avatar`, o `agent-browser` CLI e o `mapcn` no app seguem os comandos das seções acima. Eles não passam só pelo `npx skills`.
+UI/UX Pro Max, Logo Design, o pacote `open-bot-avatar`, o CLI do `agent-browser`, o `remote-agent-browser` e o componente `mapcn` seguem os comandos das seções acima.
 
 Peça ao agente em linguagem normal. Exemplos:
 
@@ -220,7 +217,7 @@ Adicione um mapa do mapcn na página de unidades.
 ```
 
 > [!WARNING]
-> `security-audit` descreve correção no código. Não use para testar sistema, conta ou rede de outra pessoa. `remote-agent-browser` e qualquer sandbox na Vercel podem gerar custo.
+> `security-audit` descreve correção no código. Use só em repositório, sistema, conta ou rede que você tem autorização para analisar. `remote-agent-browser` e qualquer sandbox na Vercel podem gerar custo. Não publique credencial, token ou IP pessoal neste repositório.
 
 ## Comandos para entendimento
 
@@ -252,5 +249,7 @@ Adicione um mapa do mapcn na página de unidades.
 | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | CLI e skill |
 | remote-agent-browser | [vercel-labs/remote-agent-browser](https://github.com/vercel-labs/remote-agent-browser) | Biblioteca |
 | mapcn | [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn) | Biblioteca, com skill opcional |
-| react-best-practices | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Skill |
-| composition-patterns | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Skill |
+| cro e seo-audit | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | Skill |
+| supabase | [supabase/agent-skills](https://github.com/supabase/agent-skills) | Skill |
+| remotion | [remotion-dev/skills](https://github.com/remotion-dev/skills) | Skill |
+| react-best-practices e composition-patterns | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Skill |
