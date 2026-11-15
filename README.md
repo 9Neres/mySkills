@@ -170,7 +170,7 @@ O mapa padrão usa tiles CARTO. Docs: [mapcn.dev](https://mapcn.dev).
 
 ### Front-end e desenvolvimento
 
-Skills públicas que completam página, SEO, dados e vídeo.
+Skills públicas que completam página, SEO e dados.
 
 | Skill | Para que serve | Instalar |
 | --- | --- | --- |
@@ -178,7 +178,6 @@ Skills públicas que completam página, SEO, dados e vídeo.
 | [seo-audit](https://github.com/coreyhaines31/marketingskills) | Auditoria técnica: indexação, meta, Core Web Vitals e rastreio. | `npx skills add coreyhaines31/marketingskills --skill seo-audit --global -y` |
 | [supabase](https://github.com/supabase/agent-skills) | Auth, banco, RLS, Storage, Edge Functions e logs do projeto Supabase. | `npx skills add supabase/agent-skills --skill supabase --global -y` |
 | [supabase-postgres-best-practices](https://github.com/supabase/agent-skills) | Tipo de coluna, índice, policy e SQL em qualquer Postgres. | `npx skills add supabase/agent-skills --skill supabase-postgres-best-practices --global -y` |
-| [remotion-best-practices](https://github.com/remotion-dev/skills) | Roteador das skills de vídeo em React: criar, legendar, animar mapa e exportar. | `npx skills add remotion-dev/skills --global -y` |
 | [react-best-practices](https://github.com/vercel-labs/agent-skills) | Performance de React e Next.js: waterfall, bundle, render e data fetching. | `npx skills add vercel-labs/agent-skills --skill react-best-practices --global -y` |
 | [composition-patterns](https://github.com/vercel-labs/agent-skills) | Composição de componentes, com menos prop drilling. | `npx skills add vercel-labs/agent-skills --skill composition-patterns --global -y` |
 
@@ -200,7 +199,6 @@ npx skills add coreyhaines31/marketingskills --skill cro --global -y
 npx skills add coreyhaines31/marketingskills --skill seo-audit --global -y
 npx skills add supabase/agent-skills --skill supabase --global -y
 npx skills add supabase/agent-skills --skill supabase-postgres-best-practices --global -y
-npx skills add remotion-dev/skills --global -y
 ```
 
 UI/UX Pro Max, Logo Design, o pacote `open-bot-avatar`, o CLI do `agent-browser`, o `remote-agent-browser` e o componente `mapcn` seguem os comandos das seções acima.
@@ -249,5 +247,4 @@ Adicione um mapa do mapcn na página de unidades.
 | mapcn | [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn) | Biblioteca, com skill opcional |
 | cro e seo-audit | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | Skill |
 | supabase | [supabase/agent-skills](https://github.com/supabase/agent-skills) | Skill |
-| remotion | [remotion-dev/skills](https://github.com/remotion-dev/skills) | Skill |
 | react-best-practices e composition-patterns | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Skill |
